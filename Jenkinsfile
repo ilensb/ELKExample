@@ -1,6 +1,12 @@
 node {
 	def application = "springbootapp"
 	def dockerhubaccountid = "baslensinc"
+	stage('Initialize'){
+        def dockerHome = tool 'local_docker'
+        def mavenHome  = tool 'local_maven'
+        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+  }
+	
 	stage('Clone repository') {
 		checkout scm
 	}
