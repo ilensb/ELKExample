@@ -17,7 +17,7 @@ services:
             - '25826:25826'
         volumes:
             - $PWD/conf.d/:/etc/logstash/conf.d/
-            - /var/log/:/var/log/
+            - /var/log/:/var/log/:rw
         command: logstash -f /etc/logstash/conf.d/logstash-spring.conf
         links: 
             - "elasticsearch:elasticsearch"
