@@ -5,7 +5,6 @@ services:
         ports:
             - '9200:9200'
             - '9300:9300'
-        command: chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/*
     kibana:
         image: docker.elastic.co/kibana/kibana:6.8.1
         ports:
@@ -19,9 +18,7 @@ services:
         volumes:
             - $PWD/conf.d/:/etc/logstash/conf.d/
             - /var/log/:/var/log/:rw
-        command: 
-            - logstash -f /etc/logstash/conf.d/logstash-spring.conf
-            - chown -R logstash:logstash /usr/share/logstash/* /var/log/*
+        command: logstash -f /etc/logstash/conf.d/logstash-spring.conf
         links: 
             - "elasticsearch:elasticsearch"
         depends_on:
